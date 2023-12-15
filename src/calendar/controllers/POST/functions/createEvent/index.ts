@@ -1,24 +1,19 @@
-import { createEventDB } from '../../../../../db/functions'
+import { createEventDB } from '../../../../../db/dta/Events'
 import { getPeriodRegardingNewDate } from './getPeriodRegardingNewDate'
 import { checkPeriod } from './periodUtils'
 
 async function createEvent(
 	title: string,
-	startDate: string,
-	endDate: string,
+	startDate: Date,
+	endDate: Date,
 ): Promise<ReturnType<typeof createEventDB> | ReturnType<typeof getPeriodRegardingNewDate>> {
 	try {
 		const check = await checkPeriod(startDate, endDate)
 		if (!check) {
 			return getPeriodRegardingNewDate(startDate, endDate)
 		}
-		const newEvent = await createEventDB(title, startDate, endDate)
-		return {
-			id: newEvent.id,
-			title: newEvent.title,
-			startDate: newEvent.startDate,
-			endDate: newEvent.endDate,
-		}
+		const newEvent = await createEventDB({ title, startDate, endDate })
+		return newEvent
 	} catch (error) {
 		console.error('Error occurred:', error)
 		throw error

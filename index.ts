@@ -1,6 +1,6 @@
 import express from 'express'
 import routes from './src/routes'
-import sequelize from './src/db/db'
+import sequelize from './src/db/dbInit'
 import { apiErrorMiddleware } from './src/middlewares/apiError.middleware'
 
 const PORT = process.env.PORT || 3000

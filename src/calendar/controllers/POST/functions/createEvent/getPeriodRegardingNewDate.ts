@@ -1,7 +1,7 @@
 import { diffDays, sortEvents, calcPeriod, findEmptyPeriods } from './periodUtils'
-import { getPeriodRegardingNewDateDB } from '../../../../../db/functions/getPeriodRegardingNewDate.db'
+import { getPeriodRegardingNewDateDB } from '../../../../../db/dta/Events/getPeriodRegardingNewDate.db'
 
-async function getPeriodRegardingNewDate(startEventDate: string, endEventDate: string) {
+async function getPeriodRegardingNewDate(startEventDate: Date, endEventDate: Date) {
 	let diff = diffDays(startEventDate, endEventDate)
 	const bookingDays = diff + 1
 	try {

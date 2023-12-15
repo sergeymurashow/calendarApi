@@ -1,16 +1,14 @@
-import { Events } from '../models'
-import ICalendarEvent from '../interfaces/ICalendarEvent'
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-import between from 'dayjs/plugin/isBetween'
+import Events, { EventInput, EventOutput } from '../../models/Events/'
+import { datesCheck } from './checks/dates.check'
 
-dayjs.extend(customParseFormat)
-dayjs.extend(between)
-
-type TGetPeriodRegardingDateDB = ICalendarEvent & { period: string }
-
-async function getPeriodRegardingNewDateDB(startDate: string, endDate: string): Promise<TGetPeriodRegardingDateDB[]> {
-	if (dayjs(startDate, 'YYYY-MM-DD').isBefore(dayjs())) throw new Error('Start date is before current date')
+async function getPeriodRegardingNewDateDB(
+	startDate: Date,
+	endDate: Date,
+): Promise<(EventOutput & { period: string })[]> {
+	const error = datesCheck(startDate, endDate)
+	if (error) {
+		throw new Error(error)
+	}
 
 	try {
 		const searchQuery = `SELECT *
@@ -61,13 +59,12 @@ async function getPeriodRegardingNewDateDB(startDate: string, endDate: string): 
 		where marked.period is not null
 		ORDER BY JULIANDAY(marked.startDate) desc;`
 
-		const events: TGetPeriodRegardingDateDB[] = (await Events.sequelize.query(searchQuery, {
+		const events = (await Events.sequelize.query(searchQuery, {
 			type: 'SELECT',
-		})) as unknown as TGetPeriodRegardingDateDB[]
+		})) as ReturnType<keyof typeof getPeriodRegardingNewDateDB>
 		return events
 	} catch (error) {
-		console.error('Error occurred:', error)
-		throw error
+		throw new Error(error.message || 'Error finding event')
 	}
 }
 

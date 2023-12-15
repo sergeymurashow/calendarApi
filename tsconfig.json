@@ -1,19 +1,16 @@
 {
-    "compilerOptions": {
-        "module": "CommonJS",
-        "esModuleInterop": true,
-        "target": "es6",
-        "moduleResolution": "Node",
-        "allowJs": true,
-        "resolveJsonModule": true,
+	"compilerOptions": {
+		"module": "CommonJS",
+		"esModuleInterop": true,
+		"target": "es6",
+		"moduleResolution": "Node",
+		"allowJs": true,
+		"resolveJsonModule": true,
 		"noImplicitAny": false,
-        "sourceMap": true,
-        "outDir": "build",
-        "rootDir": "."
-    },
-    "lib": ["es2015"],
-    "exclude": [
-        "build*.*",
-        "storage",
-    ]
+		"sourceMap": true,
+		"outDir": "build",
+		"rootDir": "."
+	},
+	"lib": ["es2015"],
+	"exclude": ["build*.*", "storage"]
 }

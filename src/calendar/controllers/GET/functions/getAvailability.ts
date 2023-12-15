@@ -1,6 +1,6 @@
 import { getEventsByPeriod } from './getEventsByPeriod'
 
-async function getAvailability(startDate: string, endDate: string): Promise<boolean> {
+async function getAvailability(startDate: Date, endDate: Date): Promise<boolean> {
 	try {
 		const events = await getEventsByPeriod(startDate, endDate)
 		return events.length ? false : true

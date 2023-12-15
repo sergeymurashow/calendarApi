@@ -5,7 +5,7 @@ import { ApiError } from '../../../errorHandler'
 
 const { validationResult, getEventsByPeriodValidation } = validator
 
-type getEventsByPeriodRequest = Request & { query: { startDate: string; endDate: string } }
+type getEventsByPeriodRequest = Request & { query: { startDate: Date; endDate: Date } }
 
 async function handler(req: getEventsByPeriodRequest, res: Response, next: NextFunction): Promise<void> {
 	const validation = validationResult(req)

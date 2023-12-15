@@ -9,7 +9,7 @@ function datesCheck(startDate, endDate) {
 	startDate = dayjs(startDate, 'YYYY-MM-DD')
 	endDate = dayjs(endDate, 'YYYY-MM-DD')
 	if (startDate.isAfter(endDate)) {
-		throw new Error('Start date must be before end date')
+		return 'Start date must be before end date'
 	}
 }
 

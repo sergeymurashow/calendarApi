@@ -1,4 +1,4 @@
-import { getPeriodDB } from '../../../../../db/functions'
+import { getPeriodDB } from '../../../../../db/dta/Events'
 import { ApiError } from '../../../../../errorHandler'
 
 import _ from 'lodash'
@@ -9,7 +9,7 @@ import between from 'dayjs/plugin/isBetween'
 dayjs.extend(customParseFormat)
 dayjs.extend(between)
 
-async function checkPeriod(startDate: string, endDate: string) {
+async function checkPeriod(startDate: Date, endDate: Date) {
 	try {
 		const events = await getPeriodDB(startDate, endDate)
 		return events.length > 0 ? false : true

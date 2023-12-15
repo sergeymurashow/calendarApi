@@ -1,8 +1,13 @@
-import { Events } from '../models'
-import { Op } from 'sequelize'
-import ICalendarEvent from '../interfaces/ICalendarEvent'
+import Events from '../../models/Events/'
+import { Op } from '../../config'
+import { datesCheck } from './checks/dates.check'
 
-async function getPeriodDB(startDate: string, endDate: string) {
+async function getPeriodDB(startDate: Date, endDate: Date) {
+	const error = datesCheck(startDate, endDate)
+	if (error) {
+		throw new Error(error)
+	}
+
 	try {
 		const searchObject = {
 			where: {
@@ -21,7 +26,7 @@ async function getPeriodDB(startDate: string, endDate: string) {
 			},
 		}
 
-		const events: ICalendarEvent[] = (await Events.findAll(searchObject)) as unknown as ICalendarEvent[]
+		const events = await Events.findAll(searchObject)
 		return events
 	} catch (error) {
 		throw new Error(error.message || 'Error getting event')
@@ -30,4 +35,4 @@ async function getPeriodDB(startDate: string, endDate: string) {
 
 export { getPeriodDB }
 
-getPeriodDB('2021-01-01', '2021-01-02')
+let t = new Events()

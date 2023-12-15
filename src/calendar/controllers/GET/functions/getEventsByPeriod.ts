@@ -1,6 +1,6 @@
-import { getPeriodDB } from '../../../../db/functions'
+import { getPeriodDB } from '../../../../db/dta/Events'
 
-async function getEventsByPeriod(startDate: string, endDate: string) {
+async function getEventsByPeriod(startDate: Date, endDate: Date) {
 	try {
 		const events = await getPeriodDB(startDate, endDate)
 		return events

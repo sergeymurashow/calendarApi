@@ -1,4 +1,4 @@
-import { getEventDB } from '../../../../db/functions'
+import { getEventDB } from '../../../../db/dta/Events'
 
 async function getEventById(id: string) {
 	try {
