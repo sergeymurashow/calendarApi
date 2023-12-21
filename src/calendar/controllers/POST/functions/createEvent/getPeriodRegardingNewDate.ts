@@ -2,7 +2,7 @@ import { diffDays, sortEvents, calcPeriod, findEmptyPeriods } from './periodUtil
 import { getPeriodRegardingNewDateDB } from '../../../../../db/dta/Events/getPeriodRegardingNewDate.db'
 
 async function getPeriodRegardingNewDate(startEventDate: Date, endEventDate: Date) {
-	let diff = diffDays(startEventDate, endEventDate)
+	const diff = diffDays(startEventDate, endEventDate)
 	const bookingDays = diff + 1
 	try {
 		const dbAnswer = await getPeriodRegardingNewDateDB(startEventDate, endEventDate)
@@ -28,8 +28,3 @@ async function getPeriodRegardingNewDate(startEventDate: Date, endEventDate: Dat
 }
 
 export { getPeriodRegardingNewDate }
-
-// ;(async () => {
-// 	const periods = await getPeriodRegardingDate('2024-02-26', '2024-02-30')
-// 	console.log(periods)
-// })()

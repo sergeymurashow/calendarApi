@@ -13,7 +13,6 @@ app.use('/api', routes)
 
 /* 
 Error handler middleware
-Must be the last 
 */
 app.use(apiErrorMiddleware)
 ;(async () => {

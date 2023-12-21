@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import calendar from './calendar';
+import { Router } from 'express'
+import calendar from './calendar'
 
-const router = Router();
+const router = Router()
 
-router.use('/calendar', calendar);
+router.use('/calendar', calendar)
 
-export default router;
+export default router
